@@ -48,8 +48,9 @@ With a free DeepL account you can translate 500.000 words per month free.
             image: directus/directus:9.16.1
             command: >
                 sh -c "
-                ${BACKEND_PRE_START_COMMAND}
-                ls && npm install global-agent && npm install directus-cut && npm install moment && npm install deepl-node && echo 'Bootstrap' && npx directus bootstrap && echo 'Node' && node -r 'global-agent/bootstrap' node_modules/directus/dist/start.js
+                npm install directus-extension-auto-translation && 
+                npx directus bootstrap && echo 'Node' && 
+                node node_modules/directus/dist/start.js
                 "
             ...
         ...
