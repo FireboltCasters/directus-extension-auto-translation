@@ -15,7 +15,7 @@
 	"scripts": {
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
-		"_uploadBuild": "cd ./dist && npm pack && npm publish && cd ..",
+		"_uploadBuild": "npm pack && npm publish && cd ..",
 		"_prepareUpload": "npm run build",
 		"_uploadWithoutPatch": "npm run _prepareUpload && npm run _uploadBuild && npm run clean",
 		"clean": "rimraf ./dist && gts clean"
