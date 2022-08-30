@@ -2,10 +2,8 @@
     Directus Extension Auto Translation
 </h2>
 <p align="center">
-    directus-extension-auto-translation
+    <img src="https://raw.githubusercontent.com/FireboltCasters/directus-extension-auto-translation/master/assets/translate-animation.gif" alt="drawing" style="width:150px;"/>
 </p>
-
-![Animation Logo](https://raw.githubusercontent.com/FireboltCasters/directus-extension-auto-translation/master/assets/translate-animation.gif)
 
 <p align="center">
   <a href="https://badge.fury.io/js/directus-extension-auto-translation.svg"><img src="https://badge.fury.io/js/directus-extension-auto-translation.svg" alt="npm package" /></a>
@@ -15,6 +13,10 @@
   <a href="https://www.npmjs.com/package/directus-extension-auto-translation"><img src="https://img.shields.io/npm/dt/directus-extension-auto-translation.svg" alt="downloads total" /></a>
   <a href="https://github.com/FireboltCasters/directus-extension-auto-translation"><img src="https://shields.io/github/languages/code-size/FireboltCasters/directus-extension-auto-translation" alt="size" /></a>
   <a href="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml"><img src="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml/badge.svg" alt="Npm publish" /></a>
+</p>
+
+<p align="center">
+    directus-extension-auto-translation
 </p>
 
 ### About
