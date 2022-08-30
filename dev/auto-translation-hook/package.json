@@ -15,7 +15,7 @@
 	"scripts": {
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
-		"release": "npm run clean && npm run build && npm pack && npm run publish && release-it --npm.skipChecks",
+		"release": "npm run clean && npm run build && npm pack && npm publish && release-it --npm.skipChecks",
 		"clean": "rm -rf ./dist"
 	},
 	"devDependencies": {
