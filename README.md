@@ -1,6 +1,11 @@
 <h2 align="center">
-    npm-template
+    Directus Extension Auto Translation
 </h2>
+<p align="center">
+    directus-extension-auto-translation
+</p>
+
+![Animation Logo](https://raw.githubusercontent.com/FireboltCasters/directus-extension-auto-translation/master/assets/translate-animation.gif)
 
 <p align="center">
   <a href="https://badge.fury.io/js/directus-extension-auto-translation.svg"><img src="https://badge.fury.io/js/directus-extension-auto-translation.svg" alt="npm package" /></a>
@@ -9,123 +14,61 @@
   <a href="https://www.npmjs.com/package/directus-extension-auto-translation"><img src="https://img.shields.io/npm/dm/directus-extension-auto-translation.svg" alt="downloads week" /></a>
   <a href="https://www.npmjs.com/package/directus-extension-auto-translation"><img src="https://img.shields.io/npm/dt/directus-extension-auto-translation.svg" alt="downloads total" /></a>
   <a href="https://github.com/FireboltCasters/directus-extension-auto-translation"><img src="https://shields.io/github/languages/code-size/FireboltCasters/directus-extension-auto-translation" alt="size" /></a>
-  <a href="https://david-dm.org/FireboltCasters/directus-extension-auto-translation"><img src="https://david-dm.org/FireboltCasters/directus-extension-auto-translation/status.svg" alt="dependencies" /></a>
-  <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FFireboltCasters%2Fdirectus-extension-auto-translation?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FFireboltCasters%2Fdirectus-extension-auto-translation.svg?type=shield"/></a>
-  <a href="https://github.com/google/gts" alt="Google TypeScript Style"><img src="https://img.shields.io/badge/code%20style-google-blueviolet.svg"/></a>
-  <a href="https://shields.io/" alt="Google TypeScript Style"><img src="https://img.shields.io/badge/uses-TypeScript-blue.svg"/></a>
-  <a href="https://github.com/marketplace/actions/lint-action"><img src="https://img.shields.io/badge/uses-Lint%20Action-blue.svg"/></a>
-</p>
-
-<p align="center">
   <a href="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml"><img src="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml/badge.svg" alt="Npm publish" /></a>
-  <a href="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/linter.yml"><img src="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/linter.yml/badge.svg" alt="Build status" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=alert_status" alt="Quality Gate" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=bugs" alt="Bugs" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=coverage" alt="Coverage" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=code_smells" alt="Code Smells" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=duplicated_lines_density" alt="Duplicated Lines (%)" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=sqale_rating" alt="Maintainability Rating" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=reliability_rating" alt="Reliability Rating" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=security_rating" alt="Security Rating" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=sqale_index" alt="Technical Debt" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=vulnerabilities" alt="Vulnerabilities" /></a>
 </p>
 
-<p align="center">
-    npm-template
-</p>
+### About
 
-## About
+This extension automatically translates Directus collections translation fields. This will be achieved by DeepL integration.
 
-A template for creating npm packages
-
-# How to setup your project
-
-1. Clone this repo or "use as template" and upload it to GitHub
-2. Setup GitHub Secrets
-2. Get your Sonar credentials
-3. Configure and run the setup script
-4. Configure Quality Gate in Sonar
+With a free DeepL account you can translate 500.000 words per month free.
 
 
-## 2. GitHub Secrets
+### Requirements
 
-If not done by your organisation you will need to define the following secrets for your repository or your organisation:
-- GITHUB_TOKEN
-- NPM_TOKEN
+- DeepL Auth-Key (free or pro)
+    - https://www.deepl.com/de/docs-api/api-access/authentication/
 
-(Note: You will also need to add a secret for Sonar in step 3.)
+### Installation
 
+1. Backup your database!
+2. Install the extension
+    - Normal project
+        ```
+        cd <directus-project-folder>
+        npm install directus-extension-auto-translation
+        ```
+   - Docker-Compose
+        Install ist 
+        In your docker-compose.yml modify your container:
+        ```
+        directus:
+            image: directus/directus:9.16.1
+            command: >
+                sh -c "
+                ${BACKEND_PRE_START_COMMAND}
+                ls && npm install global-agent && npm install directus-cut && npm install moment && npm install deepl-node && echo 'Bootstrap' && npx directus bootstrap && echo 'Node' && node -r 'global-agent/bootstrap' node_modules/directus/dist/start.js
+                "
+            ...
+        ...
+        ```
+        
+3. Follow the instructions in your Directus App add the new created table (`auto_translation_settings`)
 
-## 3. Sonar
+### Usage
+This example shows how to use the extension for a collection `wikis`
 
-Sonar Cloud will be used to analyse our project in terms of code-quality: https://en.wikipedia.org/wiki/Software_quality
-Therefore we need to get credentials for our project. Create a Sonar-Account if you dont have one (it is free).
+1. Add a `translation` type field to your collection
+2. Directus automatically creates a `wikis_translations` and `languages` collection
+3. In this translation collection (`wikis_translations`)
+    - Add a `be_source_of_translations` field (default: `true`)
+      - This field is used to determine if the translation is the source of the translation
+    - Add a `let_be_translated` field (default: `true`)
+        - This field is used to determine if the record should be translated
+    - Add a `create_translations_for_all_languages` field (default: `true`)
+        - This field is used to determine if you want to create a translation for all languages (defined in the `languages` collection)
 
-- Visit: https://sonarcloud.io/
-- Select your profile or organisation.
-- Select the GitHub project: https://sonarcloud.io/projects/create
-- Configure "With GitHub Actions" and disable SonarCloud Automatic Analysis
-- Follow Step 1: Add the secret to your repository
-- "Skip" step 2
-- Copy and paste the values of "sonar.projectKey" and "sonar.FireboltCasters" into the setup.json
-
-
-## 4. Setup Script
-
-For the correct upload to npm and sonar and keep everything working correctly, the package.json file needs to be setup correctly. This can be tedious, so that you only need to configure the setup.json file to match your project:
-
-```javascript
-{
-  "package": {
-    "name": "<directus-extension-auto-translation>",
-    "description": "<packageDescription>",
-    "keywords": [
-      "npm-template"
-    ],
-    "repositoryURL": "https://github.com/FireboltCasters/npm-template.git",
-    "author": "Steffen Droppelmann",
-    "contributors": [
-      {
-        "name": "Nils Baumgartner",
-        "email": "nilsbaumgartner1994@gmail.com",
-        "url": "https://github.com/FireboltCasters"
-      },
-      {
-        "name": "Steffen Droppelmann",
-        "email": "steffen.droppelmann@gmail.com",
-        "url": "https://github.com/FireboltCasters"
-      }
-    ],
-    "license": "MIT"
-  },
-  "sonar": {
-    "projectKey": "ExampleKey",
-    "FireboltCasters": "ExampleOrganization"
-  }
-}
-```
-
-Then, run the following command:
-(Note: After running this command, the setup files will be deleted)
-
-```
-npm run setup
-```
-
-## 5. Configure Quality Gate
-
-Push your current project to GitHub. After that you should see on GitHub under "Actions" that some GitHub-Actions are being executed. The Sonar-Action will firstly fail with: 
-```
-ERROR: QUALITY GATE STATUS: FAILED
-```
-This is because we haven't told Sonarcloud how it should measure the Quality Gate.
-
-- Visit your project at: https://sonarcloud.io/projects/
-- Select: "Set New Code definition"
-- Select the code definition for your match. We recommend: "Previous version"
-- Re-Upload your some minor change in your GitRepo to the master
-
+If you now create or update a record in the `wikis` collection with a `translation` it will be automatically translated.
 
 ## Contributors
 

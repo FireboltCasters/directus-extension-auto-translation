@@ -1,7 +1,12 @@
 const ItemsServiceCreator = require("./helper/ItemsServiceCreator");
+const CollectionsServiceCreator = require("./helper/CollectionsServiceCreator");
 const Translator = require("./Translator");
 const TranslatorSettings = require("./TranslatorSettings");
 const DirectusCollectionTranslator = require("./DirectusCollectionTranslator");
+const getSettingsSchema = require("./schema/schema.js");
+const settingsSchemaYAML = getSettingsSchema();
+const yaml = require('js-yaml');
+const settingsSchema = yaml.load(settingsSchemaYAML);
 
 async function getAndInitItemsServiceCreatorAndTranslatorSettingsAndTranslatorAndSchema(services, database, getSchema, logger) {
     let schema = await getSchema();
@@ -28,7 +33,7 @@ async function getCurrentItemForTranslation(itemsService, meta) {
     return currentItem;
 }
 
-async function handleCreateOrUpdate(tablename, payload, meta, context, getSchema, services, logger){
+async function handleCreateOrUpdate(tablename, payload, meta, context, getSchema, services, logger) {
     if (payload?.translations) {
         let database = context.database; //Have to get database here! https://github.com/directus/directus/discussions/13744
 
@@ -49,12 +54,13 @@ async function handleCreateOrUpdate(tablename, payload, meta, context, getSchema
     return payload;
 }
 
-function registerCollectionAutoTranslation(filter, tablename, getSchema, services, logger) {
+function registerCollectionAutoTranslation(filter, getSchema, services, logger) {
     let events = ["create", "update"];
     for (let event of events) {
         filter(
-            tablename + ".items."+event,
+            "items." + event,
             async (payload, meta, context) => {
+                let tablename = meta?.collection;
                 return await handleCreateOrUpdate(tablename, payload, meta, context, getSchema, services, logger);
             }
         );
@@ -80,6 +86,36 @@ function registerAuthKeyReloader(filter, translator) {
     );
 }
 
+async function checkSettingsCollection(services, database, schema) {
+    let collectionsServiceCreator = new CollectionsServiceCreator(services, database, schema);
+    let collectionsService = await collectionsServiceCreator.getCollectionsService();
+    try {
+        let collections = await collectionsService.readByQuery(); //no query params possible !
+        let collectionFound = false;
+        for (let collection of collections) {
+            if (collection.collection === TranslatorSettings.TABLENAME) {
+                collectionFound = true;
+                break;
+            }
+        }
+        if (!collectionFound) {
+            console.log("Creating "+TranslatorSettings.TABLENAME+" collection");
+            let settingsSchemaCollection = settingsSchema.collections[0];
+            let settingsSchemaFields = settingsSchema.fields;
+
+             await collectionsService.createOne({
+                 ...settingsSchemaCollection,
+                 fields: settingsSchemaFields
+             });
+        } else {
+            //console.log("Settings collection found");
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = async function ({filter, action, init, schedule}, {
     services,
     exceptions,
@@ -88,13 +124,13 @@ module.exports = async function ({filter, action, init, schedule}, {
     logger
 }) {
     let schema = await getSchema();
-/**
-    let translatorSettings = new TranslatorSettings(services, database, schema);
-    await translatorSettings.init();
-    let translator = new Translator(translatorSettings, logger);
-    await translator.init();
-    registerAuthKeyReloader(filter, translator);
+    await checkSettingsCollection(services, database, schema)
 
-    registerCollectionAutoTranslation(filter, "wikis", getSchema, services, logger);
- */
+     let translatorSettings = new TranslatorSettings(services, database, schema);
+     await translatorSettings.init();
+     let translator = new Translator(translatorSettings, logger);
+     await translator.init();
+     registerAuthKeyReloader(filter, translator);
+
+     registerCollectionAutoTranslation(filter, getSchema, services, logger);
 };

@@ -19,9 +19,9 @@
 		"clean": "rm -rf ./dist"
 	},
 	"devDependencies": {
-		"rimraf": "^3.0.2",
+		"@directus/extensions-sdk": "9.16.1",
 		"release-it": "^14.2.2",
-		"@directus/extensions-sdk": "9.16.1"
+		"rimraf": "^3.0.2"
 	},
 	"release-it": {
 		"git": {
@@ -36,6 +36,7 @@
 		}
 	},
 	"dependencies": {
-		"deepl-node": "^1.5.0"
+		"deepl-node": "^1.5.0",
+		"js-yaml": "^4.1.0"
 	}
 }
