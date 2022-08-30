@@ -1,13 +1,11 @@
 name: NPM Publish
 on:
-  workflow_run:
-    workflows: ["Check"]
-    branches: [main]
-    types:
-      - completed
+  push:
+    branches:
+      - master
 jobs:
   build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && !startsWith(github.event.head_commit.message, '[RELEASE]') }}
+    if: ${{ !startsWith(github.event.head_commit.message, '[RELEASE]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
