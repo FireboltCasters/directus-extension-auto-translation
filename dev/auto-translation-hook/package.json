@@ -1,6 +1,6 @@
 {
 	"name": "directus-extension-auto-translation-hook",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"keywords": [
 		"directus",
 		"directus-extension",
@@ -16,10 +16,9 @@
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
 		"release": "npm run clean && npm run build && release-it --npm.skipChecks",
-		"clean": "rimraf ./dist"
+		"clean": "rm -rf ./dist"
 	},
 	"devDependencies": {
-		"rimraf": "^3.0.2",
 		"release-it": "^14.2.2",
 		"@directus/extensions-sdk": "9.16.1"
 	},
