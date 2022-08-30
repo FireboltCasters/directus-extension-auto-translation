@@ -1,0 +1,13 @@
+sudo: false
+language: node_js
+node_js:
+  - '14'
+branches:
+  only:
+    - main
+before_install:
+  - npm upgrade
+install:
+  - npm install
+before_script:
+  - npm run build

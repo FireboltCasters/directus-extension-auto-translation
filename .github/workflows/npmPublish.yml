@@ -1,0 +1,25 @@
+name: NPM Publish
+on:
+  workflow_run:
+    workflows: ["Check"]
+    branches: [main]
+    types:
+      - completed
+jobs:
+  build:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && !startsWith(github.event.head_commit.message, '[RELEASE]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: git config --global user.name 'Firebolt Caster'
+      - run: git config --global user.email 'nilsbaumgartner@live.de'
+      - run: npm version patch -m "[RELEASE] %s"
+      - run: git push
+      - run: npm run _uploadWithoutPatch
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
