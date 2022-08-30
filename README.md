@@ -3,32 +3,32 @@
 </h2>
 
 <p align="center">
-  <a href="https://badge.fury.io/js/packageName.svg"><img src="https://badge.fury.io/js/packageName.svg" alt="npm package" /></a>
-  <a href="https://img.shields.io/github/license/organization/packageName"><img src="https://img.shields.io/github/license/organization/packageName" alt="MIT" /></a>
-  <a href="https://img.shields.io/github/last-commit/organization/packageName?logo=git"><img src="https://img.shields.io/github/last-commit/organization/packageName?logo=git" alt="last commit" /></a>
-  <a href="https://www.npmjs.com/package/packageName"><img src="https://img.shields.io/npm/dm/packageName.svg" alt="downloads week" /></a>
-  <a href="https://www.npmjs.com/package/packageName"><img src="https://img.shields.io/npm/dt/packageName.svg" alt="downloads total" /></a>
-  <a href="https://github.com/organization/packageName"><img src="https://shields.io/github/languages/code-size/organization/packageName" alt="size" /></a>
-  <a href="https://david-dm.org/organization/packageName"><img src="https://david-dm.org/organization/packageName/status.svg" alt="dependencies" /></a>
-  <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Forganization%2FpackageName?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Forganization%2FpackageName.svg?type=shield"/></a>
+  <a href="https://badge.fury.io/js/directus-extension-auto-translation.svg"><img src="https://badge.fury.io/js/directus-extension-auto-translation.svg" alt="npm package" /></a>
+  <a href="https://img.shields.io/github/license/FireboltCasters/directus-extension-auto-translation"><img src="https://img.shields.io/github/license/FireboltCasters/directus-extension-auto-translation" alt="MIT" /></a>
+  <a href="https://img.shields.io/github/last-commit/FireboltCasters/directus-extension-auto-translation?logo=git"><img src="https://img.shields.io/github/last-commit/FireboltCasters/directus-extension-auto-translation?logo=git" alt="last commit" /></a>
+  <a href="https://www.npmjs.com/package/directus-extension-auto-translation"><img src="https://img.shields.io/npm/dm/directus-extension-auto-translation.svg" alt="downloads week" /></a>
+  <a href="https://www.npmjs.com/package/directus-extension-auto-translation"><img src="https://img.shields.io/npm/dt/directus-extension-auto-translation.svg" alt="downloads total" /></a>
+  <a href="https://github.com/FireboltCasters/directus-extension-auto-translation"><img src="https://shields.io/github/languages/code-size/FireboltCasters/directus-extension-auto-translation" alt="size" /></a>
+  <a href="https://david-dm.org/FireboltCasters/directus-extension-auto-translation"><img src="https://david-dm.org/FireboltCasters/directus-extension-auto-translation/status.svg" alt="dependencies" /></a>
+  <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FFireboltCasters%2Fdirectus-extension-auto-translation?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FFireboltCasters%2Fdirectus-extension-auto-translation.svg?type=shield"/></a>
   <a href="https://github.com/google/gts" alt="Google TypeScript Style"><img src="https://img.shields.io/badge/code%20style-google-blueviolet.svg"/></a>
   <a href="https://shields.io/" alt="Google TypeScript Style"><img src="https://img.shields.io/badge/uses-TypeScript-blue.svg"/></a>
   <a href="https://github.com/marketplace/actions/lint-action"><img src="https://img.shields.io/badge/uses-Lint%20Action-blue.svg"/></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/organization/packageName/actions/workflows/npmPublish.yml"><img src="https://github.com/organization/packageName/actions/workflows/npmPublish.yml/badge.svg" alt="Npm publish" /></a>
-  <a href="https://github.com/organization/packageName/actions/workflows/linter.yml"><img src="https://github.com/organization/packageName/actions/workflows/linter.yml/badge.svg" alt="Build status" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=alert_status" alt="Quality Gate" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=bugs" alt="Bugs" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=coverage" alt="Coverage" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=code_smells" alt="Code Smells" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=duplicated_lines_density" alt="Duplicated Lines (%)" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=sqale_rating" alt="Maintainability Rating" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=reliability_rating" alt="Reliability Rating" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=security_rating" alt="Security Rating" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=sqale_index" alt="Technical Debt" /></a>
-  <a href="https://sonarcloud.io/dashboard?id=sonarProjectKey"><img src="https://sonarcloud.io/api/project_badges/measure?project=sonarProjectKey&metric=vulnerabilities" alt="Vulnerabilities" /></a>
+  <a href="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml"><img src="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml/badge.svg" alt="Npm publish" /></a>
+  <a href="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/linter.yml"><img src="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/linter.yml/badge.svg" alt="Build status" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=alert_status" alt="Quality Gate" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=bugs" alt="Bugs" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=coverage" alt="Coverage" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=code_smells" alt="Code Smells" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=duplicated_lines_density" alt="Duplicated Lines (%)" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=sqale_rating" alt="Maintainability Rating" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=reliability_rating" alt="Reliability Rating" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=security_rating" alt="Security Rating" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=sqale_index" alt="Technical Debt" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=FireboltCasters_directus-extension-auto-translation"><img src="https://sonarcloud.io/api/project_badges/measure?project=FireboltCasters_directus-extension-auto-translation&metric=vulnerabilities" alt="Vulnerabilities" /></a>
 </p>
 
 <p align="center">
@@ -68,7 +68,7 @@ Therefore we need to get credentials for our project. Create a Sonar-Account if 
 - Configure "With GitHub Actions" and disable SonarCloud Automatic Analysis
 - Follow Step 1: Add the secret to your repository
 - "Skip" step 2
-- Copy and paste the values of "sonar.projectKey" and "sonar.organization" into the setup.json
+- Copy and paste the values of "sonar.projectKey" and "sonar.FireboltCasters" into the setup.json
 
 
 ## 4. Setup Script
@@ -78,7 +78,7 @@ For the correct upload to npm and sonar and keep everything working correctly, t
 ```javascript
 {
   "package": {
-    "name": "<packageName>",
+    "name": "<directus-extension-auto-translation>",
     "description": "<packageDescription>",
     "keywords": [
       "npm-template"
@@ -101,7 +101,7 @@ For the correct upload to npm and sonar and keep everything working correctly, t
   },
   "sonar": {
     "projectKey": "ExampleKey",
-    "organization": "ExampleOrganization"
+    "FireboltCasters": "ExampleOrganization"
   }
 }
 ```
@@ -131,4 +131,4 @@ This is because we haven't told Sonarcloud how it should measure the Quality Gat
 
 The FireboltCasters
 
-<a href="https://github.com/organization/packageName"><img src="https://contrib.rocks/image?repo=organization/packageName" alt="Contributors" /></a>
+<a href="https://github.com/FireboltCasters/directus-extension-auto-translation"><img src="https://contrib.rocks/image?repo=FireboltCasters/directus-extension-auto-translation" alt="Contributors" /></a>

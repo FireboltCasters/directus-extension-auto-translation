@@ -1,6 +1,0 @@
-# Ignore artifacts:
-build
-.github
-
-# Ignore all HTML files:
-*.html

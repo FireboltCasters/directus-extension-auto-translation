@@ -1,0 +1,8 @@
+{
+	"name": "directus-extension-auto-translation-dev",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "cd auto-translation-hook && npm run build && cd ..",
+		"dev": "cd auto-translation-hook && npm run dev",
+	}
+}

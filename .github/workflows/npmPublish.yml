@@ -15,10 +15,9 @@ jobs:
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
       - run: git config --global user.name 'Firebolt Caster'
       - run: git config --global user.email 'nilsbaumgartner@live.de'
-      - run: npm version patch -m "[RELEASE] %s"
+      - run: cd ./dev/auto-translation-hook && npm version patch -m "[RELEASE] %s"
       - run: git push
       - run: npm run _uploadWithoutPatch
         env:

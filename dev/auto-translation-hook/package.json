@@ -1,0 +1,29 @@
+{
+	"name": "directus-extension-auto-translation-hook",
+	"version": "1.0.0",
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-hook"
+	],
+	"directus:extension": {
+		"type": "hook",
+		"path": "dist/index.js",
+		"source": "src/index.js",
+		"host": "^9.16.1"
+	},
+	"scripts": {
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
+		"_uploadBuild": "cd ./dist && npm pack && npm publish && cd ..",
+		"_prepareUpload": "npm run build",
+		"_uploadWithoutPatch": "npm run _prepareUpload && npm run _uploadBuild && npm run clean",
+		"clean": "rimraf ./dist && gts clean"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "9.16.1"
+	},
+	"dependencies": {
+		"deepl-node": "^1.5.0"
+	}
+}

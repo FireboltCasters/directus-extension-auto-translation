@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  directus:
+    container_name: directus-auto-translation
+    image: directus/directus:9.16.1
+    ports:
+      - 8055:8055
+    volumes:
+      # By default, uploads are stored in /directus/uploads
+      # Always make sure your volumes matches the storage root when using
+      # local driver
+      - ./uploads:/directus/uploads
+      # Make sure to also mount the volume when using SQLite
+      - ./database:/directus/database
+      # If you want to load extensions from the host
+      - ./auto-translation-hook/dist/index.js:/directus/extensions/hooks/auto-translation-hook/index.js
+    networks:
+      - directus
+    environment:
+      KEY: '255d861b-5ea1-5996-9aa3-922530ec40b1'
+      SECRET: '6116487b-cda1-52c2-b5b5-c8022c45e263'
+
+      EXTENSIONS_AUTO_RELOAD: 'true'
+
+      DB_CLIENT: 'sqlite3' # https://docs.directus.io/configuration/config-options/
+      DB_FILENAME: './database/data.db'
+
+      CACHE_ENABLED: 'false'
+
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'd1r3ctu5'
+
+networks:
+  directus:
