@@ -17,6 +17,7 @@ jobs:
       - run: git config --global user.email 'nilsbaumgartner@live.de'
       - run: cd ./dev/auto-translation-hook && npm version patch -m "[RELEASE] %s"
       - run: git push
+      - run: cd ./dev/auto-translation-hook && npm ci
       - run: cd ./dev/auto-translation-hook && npm run _uploadWithoutPatch
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
