@@ -15,7 +15,13 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: git config --global user.name 'Firebolt Caster'
       - run: git config --global user.email 'nilsbaumgartner@live.de'
+      - run: cp README.md ./dev/auto-translation-hook/README.md
+      - run: git add ./dev/auto-translation-hook/README.md
+      - run: git commit -m "[RELEASE] Copied README.md to dev/auto-translation-hook"
       - run: cd ./dev/auto-translation-hook && npm ci
       - run: cd ./dev/auto-translation-hook && npm run release
+      - run: rm -rf ./dev/auto-translation-hook/README.md
+      - run: git commit -m "[RELEASE] Removed README.md from dev/auto-translation-hook"
+      - run: git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
