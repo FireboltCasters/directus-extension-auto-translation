@@ -15,10 +15,12 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: git config --global user.name 'Firebolt Caster'
       - run: git config --global user.email 'nilsbaumgartner@live.de'
-      - run: npm version patch -m "[RELEASE] %s"
-        - working-dir: ./dev/auto-translation-hook
+      - name: Increase Version
+          working-directory: ./dev/auto-translation-hook
+          run: npm version patch -m "[RELEASE] %s
       - run: git push
-      - run: npm run _uploadWithoutPatch
-       - working-dir: ./dev/auto-translation-hook
+      - name: Upload
+          working-directory: ./dev/auto-translation-hook
+          run: npm version patch -m "[RELEASE] %s
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
