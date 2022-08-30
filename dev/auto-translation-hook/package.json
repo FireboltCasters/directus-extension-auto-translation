@@ -1,6 +1,6 @@
 {
 	"name": "directus-extension-auto-translation",
-	"version": "1.0.23",
+	"version": "1.0.25",
 	"keywords": [
 		"directus",
 		"directus-extension",
@@ -15,7 +15,7 @@
 	"scripts": {
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
-		"release": "npm run clean && npm run build && release-it --npm.skipChecks",
+		"release": "npm run clean && npm run build && npm run pack && npm run publish && release-it --npm.skipChecks",
 		"clean": "rm -rf ./dist"
 	},
 	"devDependencies": {
