@@ -253,7 +253,7 @@ module.exports = function () {
       '          If you want a collection (e. G. wikis) to be translated do the\n' +
       '          following. Add a field type "translations" which will create a new\n' +
       '          collection (e. G. wikis_translations). In this collection add the\n' +
-      '          following boolean (default: true) fields: "be_source_of_translations",\n' +
+      '          following boolean (default: true) fields: "be_source_for_translations",\n' +
       '          "let_be_translated" and "create_translations_for_all_languages".\n' +
       '          Ensure that Directus automatically created a collection "languages".\n' +
       '      readonly: false\n' +

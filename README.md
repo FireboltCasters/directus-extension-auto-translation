@@ -64,7 +64,7 @@ This example shows how to use the extension for a collection `wikis`
 1. Add a `translation` type field to your collection
 2. Directus automatically creates a `wikis_translations` and `languages` collection
 3. In this translation collection (`wikis_translations`)
-    - Add a `be_source_of_translations` field (default: `true`)
+    - Add a `be_source_for_translations` field (default: `true`)
       - This field is used to determine if the translation is the source of the translation
     - Add a `let_be_translated` field (default: `true`)
         - This field is used to determine if the record should be translated
