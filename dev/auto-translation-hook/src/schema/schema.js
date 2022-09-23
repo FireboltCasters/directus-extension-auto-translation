@@ -237,13 +237,13 @@ module.exports = function () {
       '      table: auto_translation_settings\n' +
       '    type: integer\n' +
       '  - collection: auto_translation_settings\n' +
-      '    field: notice-dmnvns\n' +
+      '    field: notice\n' +
       '    meta:\n' +
       '      collection: auto_translation_settings\n' +
       '      conditions: null\n' +
       '      display: null\n' +
       '      display_options: null\n' +
-      '      field: notice-dmnvns\n' +
+      '      field: notice\n' +
       '      group: visible_for_valid_auth_key\n' +
       '      hidden: false\n' +
       '      interface: presentation-notice\n' +

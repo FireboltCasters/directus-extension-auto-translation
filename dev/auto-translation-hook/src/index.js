@@ -43,10 +43,10 @@ async function handleCreateOrUpdate(tablename, payload, meta, context, getSchema
             translator,
             schema
         } = await getAndInitItemsServiceCreatorAndTranslatorSettingsAndTranslatorAndSchema(services, database, getSchema, logger);
-        let itemsService = await itemsServiceCreator.getItemsService(tablename);
 
         let autoTranslate = await translatorSettings.isAutoTranslationEnabled();
         if (autoTranslate) {
+            let itemsService = await itemsServiceCreator.getItemsService(tablename);
             let currentItem = await getCurrentItemForTranslation(itemsService, meta);
             return await DirectusCollectionTranslator.modifyPayloadForTranslation(currentItem, payload, translator, translatorSettings, itemsServiceCreator, schema, tablename);
         }
@@ -65,6 +65,40 @@ function registerCollectionAutoTranslation(filter, getSchema, services, logger) 
             }
         );
     }
+}
+
+async function checkAllCollectionsForMissingTranslations(payload, meta, context, getSchema, services, logger) {
+    let database = context.database; //Have to get database here! https://github.com/directus/directus/discussions/13744
+
+    let {
+        itemsServiceCreator,
+        translatorSettings,
+        translator,
+        schema
+    } = await getAndInitItemsServiceCreatorAndTranslatorSettingsAndTranslatorAndSchema(services, database, getSchema, logger);
+    let autoTranslate = await translatorSettings.isAutoTranslationEnabled();
+    if (autoTranslate) {
+        //let itemsService = await itemsServiceCreator.getItemsService(tablename);
+
+        let currentItem = await getCurrentItemForTranslation(itemsService, meta);
+        return await DirectusCollectionTranslator.modifyPayloadForTranslation(currentItem, payload, translator, translatorSettings, itemsServiceCreator, schema, tablename);
+    }
+}
+
+function registerLanguagesFilter(filter, getSchema, services, logger) {
+    const tableName = "languages";
+    filter(
+        tableName+".items." + "create",
+        async (payload, meta, context) => {
+            return await checkAllCollectionsForMissingTranslations(payload, meta, context, getSchema, services, logger);
+        }
+    );
+    filter(
+        tableName+".items." + "update",
+        async (payload, meta, context) => {
+            //return await checkAllCollectionsForMissingTranslations(payload, meta, context, getSchema, services, logger);
+        }
+    );
 }
 
 
@@ -133,4 +167,5 @@ module.exports = async function ({filter, action, init, schedule}, {
      registerAuthKeyReloader(filter, translator);
 
      registerCollectionAutoTranslation(filter, getSchema, services, logger);
+     registerLanguagesFilter(filter, getSchema, services, logger);
 };
