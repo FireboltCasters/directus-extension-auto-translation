@@ -133,14 +133,16 @@ async function checkSettingsCollection(services, database, schema) {
             }
         }
         if (!collectionFound) {
-            console.log("Creating "+TranslatorSettings.TABLENAME+" collection");
+            console.log("Collection "+TranslatorSettings.TABLENAME+" not found");
             let settingsSchemaCollection = settingsSchema.collections[0];
             let settingsSchemaFields = settingsSchema.fields;
 
+            console.log("Creating "+TranslatorSettings.TABLENAME+" collection");
              await collectionsService.createOne({
                  ...settingsSchemaCollection,
                  fields: settingsSchemaFields
              });
+            console.log("Created "+TranslatorSettings.TABLENAME+" collection");
         } else {
             //console.log("Settings collection found");
         }

@@ -1,6 +1,6 @@
 module.exports = function () {
   return 'version: 1\n' +
-      'directus: 9.16.1\n' +
+      'directus: 9.18.1\n' +
       'collections:\n' +
       '  - collection: auto_translation_settings\n' +
       '    meta:\n' +
@@ -25,13 +25,13 @@ module.exports = function () {
       '    schema:\n' +
       '      name: auto_translation_settings\n' +
       '      sql: >-\n' +
-      '        CREATE TABLE "auto_translation_settings" (`id` integer PRIMARY KEY\n' +
-      '        AUTOINCREMENT NOT NULL, `auth_key` varchar(255) NULL, `used` integer\n' +
-      '        NULL DEFAULT \'0\', `limit` integer NULL DEFAULT \'500000\', `informations`\n' +
-      '        text NULL DEFAULT null, `valid_auth_key` boolean NULL DEFAULT \'false\',\n' +
-      '        `active` boolean NULL DEFAULT \'true\', `percentage` integer NULL DEFAULT\n' +
-      '        null)\n' +
-      'fields:\n' +
+      '        CREATE TABLE `auto_translation_settings` (`active` boolean null default\n' +
+      '        \'1\', `auth_key` varchar(255) null default null, `id` integer not null\n' +
+      '        primary key autoincrement, `informations` text null default null,\n' +
+      '        `limit` integer null default \'500000\', `percentage` integer null default\n' +
+      '        null, `used` integer null default \'0\', `valid_auth_key` boolean null\n' +
+      '        default \'0\', `extra` text null default null)\n' +
+     'fields:\n' +
       '  - collection: auto_translation_settings\n' +
       '    field: active\n' +
       '    meta:\n' +
@@ -122,6 +122,44 @@ module.exports = function () {
       '      numeric_scale: null\n' +
       '      table: auto_translation_settings\n' +
       '    type: string\n' +
+      '  - collection: auto_translation_settings\n' +
+      '    field: extra\n' +
+      '    meta:\n' +
+      '      collection: auto_translation_settings\n' +
+      '      conditions: null\n' +
+      '      display: null\n' +
+      '      display_options: null\n' +
+      '      field: extra\n' +
+      '      group: visible_for_valid_auth_key\n' +
+      '      hidden: false\n' +
+      '      interface: input-multiline\n' +
+      '      note: Informations about errors will be shown here.\n' +
+      '      options: null\n' +
+      '      readonly: true\n' +
+      '      required: false\n' +
+      '      sort: 4\n' +
+      '      special: null\n' +
+      '      translations: null\n' +
+      '      validation: null\n' +
+      '      validation_message: null\n' +
+      '      width: full\n' +
+      '    schema:\n' +
+      '      data_type: text\n' +
+      '      default_value: null\n' +
+      '      foreign_key_column: null\n' +
+      '      foreign_key_table: null\n' +
+      '      generation_expression: null\n' +
+      '      has_auto_increment: false\n' +
+      '      is_generated: false\n' +
+      '      is_nullable: true\n' +
+      '      is_primary_key: false\n' +
+      '      is_unique: false\n' +
+      '      max_length: null\n' +
+      '      name: extra\n' +
+      '      numeric_precision: null\n' +
+      '      numeric_scale: null\n' +
+      '      table: auto_translation_settings\n' +
+      '    type: text\n' +
       '  - collection: auto_translation_settings\n' +
       '    field: id\n' +
       '    meta:\n' +
@@ -253,9 +291,10 @@ module.exports = function () {
       '          If you want a collection (e. G. wikis) to be translated do the\n' +
       '          following. Add a field type "translations" which will create a new\n' +
       '          collection (e. G. wikis_translations). In this collection add the\n' +
-      '          following boolean (default: true) fields: "be_source_for_translations",\n' +
-      '          "let_be_translated" and "create_translations_for_all_languages".\n' +
-      '          Ensure that Directus automatically created a collection "languages".\n' +
+      '          following boolean (default: true) fields:\n' +
+      '          "be_source_for_translations", "let_be_translated" and\n' +
+      '          "create_translations_for_all_languages". Ensure that Directus\n' +
+      '          automatically created a collection "languages".\n' +
       '      readonly: false\n' +
       '      required: false\n' +
       '      sort: 1\n' +
@@ -446,5 +485,5 @@ module.exports = function () {
       '      width: full\n' +
       '    schema: null\n' +
       '    type: alias\n' +
-      'relations: []\n'
+       'relations: []\n'
 };

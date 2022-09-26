@@ -1,0 +1,588 @@
+version: 1
+directus: 9.18.1
+collections:
+  - collection: auto_translation_settings
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: auto_translation_settings
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: true
+      sort: 2
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: auto_translation_settings
+      sql: >-
+        CREATE TABLE `auto_translation_settings` (`active` boolean null default
+        '1', `auth_key` varchar(255) null default null, `id` integer not null
+        primary key autoincrement, `informations` text null default null,
+        `limit` integer null default '500000', `percentage` integer null default
+        null, `used` integer null default '0', `valid_auth_key` boolean null
+        default '0', `extra` text null default null)
+  - collection: test
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: test
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: test
+      sql: >-
+        CREATE TABLE `test` (`id` integer not null primary key autoincrement,
+        `name` varchar(255) null)
+fields:
+  - collection: auto_translation_settings
+    field: active
+    meta:
+      collection: auto_translation_settings
+      conditions:
+        - name: 'false'
+          rule:
+            _and:
+              - valid_auth_key:
+                  _eq: false
+          options:
+            iconOn: check_box
+            iconOff: check_box_outline_blank
+            label: Enabled
+      display: null
+      display_options: null
+      field: active
+      group: visible_for_valid_auth_key
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: boolean
+      default_value: true
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: active
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: boolean
+  - collection: auto_translation_settings
+    field: auth_key
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: auth_key
+      group: null
+      hidden: false
+      interface: input
+      note: >-
+        Authentication - You need an authentication key to access to the API.
+        https://www.deepl.com/de/docs-api/accessing-the-api/authentication/
+      options:
+        iconLeft: key
+        masked: true
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: varchar
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: auth_key
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: string
+  - collection: auto_translation_settings
+    field: extra
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: extra
+      group: visible_for_valid_auth_key
+      hidden: false
+      interface: input-multiline
+      note: Informations about errors will be shown here.
+      options: null
+      readonly: true
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: text
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: extra
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: text
+  - collection: auto_translation_settings
+    field: id
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: false
+      max_length: null
+      name: id
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: integer
+  - collection: auto_translation_settings
+    field: informations
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: informations
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: Informations about errors will be shown here.
+      options: null
+      readonly: true
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: text
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: informations
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: text
+  - collection: auto_translation_settings
+    field: limit
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: limit
+      group: usage
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      data_type: integer
+      default_value: 500000
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: limit
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: integer
+  - collection: auto_translation_settings
+    field: notice
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: notice
+      group: visible_for_valid_auth_key
+      hidden: false
+      interface: presentation-notice
+      note: null
+      options:
+        text: >-
+          If you want a collection (e. G. wikis) to be translated do the
+          following. Add a field type "translations" which will create a new
+          collection (e. G. wikis_translations). In this collection add the
+          following boolean (default: true) fields:
+          "be_source_for_translations", "let_be_translated" and
+          "create_translations_for_all_languages". Ensure that Directus
+          automatically created a collection "languages".
+      readonly: false
+      required: false
+      sort: 1
+      special:
+        - alias
+        - no-data
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema: null
+    type: alias
+  - collection: auto_translation_settings
+    field: percentage
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: formatted-value
+      display_options:
+        suffix: ' %'
+      field: percentage
+      group: usage
+      hidden: false
+      interface: slider
+      note: null
+      options:
+        alwaysShowValue: true
+        maxValue: 100
+        minValue: 0
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: percentage
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: integer
+  - collection: auto_translation_settings
+    field: usage
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: usage
+      group: visible_for_valid_auth_key
+      hidden: false
+      interface: group-raw
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special:
+        - alias
+        - group
+        - no-data
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema: null
+    type: alias
+  - collection: auto_translation_settings
+    field: used
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: raw
+      display_options: null
+      field: used
+      group: usage
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      data_type: integer
+      default_value: 0
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: used
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: integer
+  - collection: auto_translation_settings
+    field: valid_auth_key
+    meta:
+      collection: auto_translation_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: valid_auth_key
+      group: null
+      hidden: true
+      interface: boolean
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 2
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: boolean
+      default_value: false
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: valid_auth_key
+      numeric_precision: null
+      numeric_scale: null
+      table: auto_translation_settings
+    type: boolean
+  - collection: auto_translation_settings
+    field: visible_for_valid_auth_key
+    meta:
+      collection: auto_translation_settings
+      conditions:
+        - rule:
+            _and:
+              - valid_auth_key:
+                  _eq: false
+          readonly: true
+          hidden: true
+          options: {}
+      display: null
+      display_options: null
+      field: visible_for_valid_auth_key
+      group: null
+      hidden: false
+      interface: group-raw
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special:
+        - alias
+        - group
+        - no-data
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema: null
+    type: alias
+  - collection: test
+    field: id
+    meta:
+      collection: test
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: false
+      max_length: null
+      name: id
+      numeric_precision: null
+      numeric_scale: null
+      table: test
+    type: integer
+  - collection: test
+    field: name
+    meta:
+      collection: test
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      data_type: varchar
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: name
+      numeric_precision: null
+      numeric_scale: null
+      table: test
+    type: string
+relations: []

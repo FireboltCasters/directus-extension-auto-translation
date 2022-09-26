@@ -56,6 +56,19 @@ module.exports = class DeepLTranlator {
         return translation;
     }
 
+    async getExtra(){
+        let extraObj = {};
+        const sourceLanguages = await this.translator.getSourceLanguages()
+        const targetLanguages = await this.translator.getTargetLanguages()
+        extraObj.sourceLanguages = sourceLanguages;
+        extraObj.targetLanguages = targetLanguages;
+        const extra = JSON.stringify(extraObj, null, 2);
+
+        return {
+            extra: extra || "",
+        }
+    }
+
     async getUsage(){
         const usage = await this.translator.getUsage();
         if (usage.anyLimitReached()) {

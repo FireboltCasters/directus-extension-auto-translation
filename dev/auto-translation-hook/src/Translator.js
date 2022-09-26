@@ -26,7 +26,8 @@ module.exports = class Translator {
 
     async getSettingsAuthKeyCorrectObject() {
         const usage = await this.getUsage();
-        return {valid_auth_key: true, informations: "Auth Key is valid!", ...usage};
+        const extra = await this.getExtra();
+        return {valid_auth_key: true, informations: "Auth Key is valid!", ...usage, ...extra};
     }
 
     getSettingsAuthKeyErrorObject(error) {
@@ -54,6 +55,10 @@ module.exports = class Translator {
 
     async getUsage() {
         return await this.translatorImplementation.getUsage();
+    }
+
+    async getExtra() {
+        return await this.translatorImplementation.getExtra();
     }
 
     async setSettings(newSettings) {
