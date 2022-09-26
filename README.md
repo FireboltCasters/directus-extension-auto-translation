@@ -55,8 +55,10 @@ With a free DeepL account you can translate 500.000 words per month free.
             ...
         ...
         ```
-        
-3. Follow the instructions in your Directus App add the new created table (`auto_translation_settings`)
+
+3. Start Directus, it will result in an error, because tables may be created
+4. Restart Directus and follow the instructions in your Directus App add the new created table (`auto_translation_settings`)
+5. Maybe restart a last time, so that the api key is correctly reloaded
 
 ### Usage
 This example shows how to use the extension for a collection `wikis`

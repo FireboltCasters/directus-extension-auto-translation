@@ -106,16 +106,12 @@ function registerAuthKeyReloader(filter, translator) {
     filter(
         TranslatorSettings.TABLENAME + ".items.update",
         async (payload, meta, context) => {
-            console.log("Reloading auth key");
             if (payload?.auth_key !== undefined) { // Auth Key changed
-                console.log("Auth key changed");
                 try {
                     await translator.reloadAuthKey(payload?.auth_key); //Try to reload auth key
                     const correctObj = await translator.getSettingsAuthKeyCorrectObject(); //
-                    console.log("Auth key correct object", correctObj);
                     payload = {...payload, ...correctObj}; //Set settings to valid
                 } catch (err) { //Auth Key not valid
-                    console.log("Auth key not valid");
                     console.log(err);
                     payload = {...payload, ...translator.getSettingsAuthKeyErrorObject(err)};
                 }
