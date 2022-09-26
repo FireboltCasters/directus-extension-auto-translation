@@ -167,5 +167,5 @@ module.exports = async function ({filter, action, init, schedule}, {
      registerAuthKeyReloader(filter, translator);
 
      registerCollectionAutoTranslation(filter, getSchema, services, logger);
-     registerLanguagesFilter(filter, getSchema, services, logger);
+     //registerLanguagesFilter(filter, getSchema, services, logger); //TODO implement auto translate for new languages
 };
