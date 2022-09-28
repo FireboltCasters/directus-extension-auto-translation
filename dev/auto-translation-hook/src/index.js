@@ -159,15 +159,28 @@ module.exports = async function ({filter, action, init, schedule}, {
     getSchema,
     logger
 }) {
-    let schema = await getSchema();
-    await checkSettingsCollection(services, database, schema)
+    try{
+        let schema = await getSchema();
+        await checkSettingsCollection(services, database, schema)
 
-     let translatorSettings = new TranslatorSettings(services, database, schema);
-     await translatorSettings.init();
-     let translator = new Translator(translatorSettings, logger);
-     await translator.init();
-     registerAuthKeyReloader(filter, translator);
+        let translatorSettings = new TranslatorSettings(services, database, schema);
+        await translatorSettings.init();
+        let translator = new Translator(translatorSettings, logger);
+        await translator.init();
+        registerAuthKeyReloader(filter, translator);
 
-     registerCollectionAutoTranslation(filter, getSchema, services, logger);
-     //registerLanguagesFilter(filter, getSchema, services, logger); //TODO implement auto translate for new languages
+        registerCollectionAutoTranslation(filter, getSchema, services, logger);
+        //registerLanguagesFilter(filter, getSchema, services, logger); //TODO implement auto translate for new languages
+    } catch (err) {
+        let errMsg = err.toString();
+        if(errMsg.includes("no such table: directus_collections")){
+            console.log("++++++++++ Auto Translation +++++++++++");
+            console.log("++++ Database not initialized yet +++++");
+            console.log("++ Restart Server again after setup +++");
+            console.log("+++++++++++++++++++++++++++++++++++++++");
+        } else {
+            console.log("Auto-Translation init error: ");
+            console.log(err);
+        }
+    }
 };
