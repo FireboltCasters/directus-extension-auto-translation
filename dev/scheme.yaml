@@ -117,7 +117,7 @@ fields:
       interface: input
       note: >-
         Authentication - You need an authentication key to access to the API.
-        https://www.deepl.com/de/docs-api/accessing-the-api/authentication/
+        https://www.deepl.com/de/account/summary
       options:
         iconLeft: key
         masked: true

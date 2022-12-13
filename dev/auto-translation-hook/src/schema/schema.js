@@ -93,7 +93,7 @@ module.exports = function () {
       '      interface: input\n' +
       '      note: >-\n' +
       '        Authentication - You need an authentication key to access to the API.\n' +
-      '        https://www.deepl.com/de/docs-api/accessing-the-api/authentication/\n' +
+      '        https://www.deepl.com/de/account/summary\n' +
       '      options:\n' +
       '        iconLeft: key\n' +
       '        masked: true\n' +

@@ -51,8 +51,30 @@ module.exports = class DeepLTranlator {
     }
 
     async translateRaw(text, source_language_code, destination_language_code) {
-        let translationResponse = await this.translator.translateText(text, source_language_code, destination_language_code);
+        //copy text string to another variable
+        let textToTranslate = text;
+
+        const dictWithReplacement = {
+            // "original": "replacement"
+            // replace * with <*>
+            "*": "<*>",
+        }
+
+        //replace all keys in dictWithReplacement with their values
+        for (const [key, value] of Object.entries(dictWithReplacement)) {
+            textToTranslate = textToTranslate.replaceAll(key, value);
+        }
+
+        let translationResponse = await this.translator.translateText(textToTranslate, source_language_code, destination_language_code);
         let translation = translationResponse?.text;
+
+        //replace all values in dictWithReplacement with their keys
+        for (const [key, value] of Object.entries(dictWithReplacement)) {
+            translation = translation.replaceAll(value, key);
+        }
+
+        //replace all <*>'s with *'s
+
         return translation;
     }
 
