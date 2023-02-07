@@ -12,7 +12,8 @@
   <a href="https://www.npmjs.com/package/directus-extension-auto-translation"><img src="https://img.shields.io/npm/dm/directus-extension-auto-translation.svg" alt="downloads week" /></a>
   <a href="https://www.npmjs.com/package/directus-extension-auto-translation"><img src="https://img.shields.io/npm/dt/directus-extension-auto-translation.svg" alt="downloads total" /></a>
   <a href="https://github.com/FireboltCasters/directus-extension-auto-translation"><img src="https://shields.io/github/languages/code-size/FireboltCasters/directus-extension-auto-translation" alt="size" /></a>
-  <a href="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml"><img src="https://github.com/FireboltCasters/directus-extension-auto-translation/actions/workflows/npmPublish.yml/badge.svg" alt="Npm publish" /></a>
+  <a href="https://github.com/FireboltCasters/directus-extension-auto-translation"><img src="https://shields.io/github/languages/code-size/FireboltCasters/directus-extension-auto-translation" alt="size" /></a>
+    <a href="https://jessemillar.com/r/man-hours"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fmh.jessemillar.com%2Fhours%3Frepo%3Dhttps%3A%2F%2Fgithub.com%2FFireboltCasters%2Fdirectus-extension-auto-translation" alt="size" /></a>
 </p>
 
 <p align="center">
