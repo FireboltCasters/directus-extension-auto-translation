@@ -7,6 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 
 dev/auto-translation-hook/README.md
+dev/auto-translation-hook/dist/index.js
 
 dev/database/**
 
