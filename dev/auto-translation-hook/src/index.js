@@ -108,9 +108,16 @@ function registerAuthKeyReloader(filter, translator) {
         async (payload, meta, context) => {
             if (payload?.auth_key !== undefined) { // Auth Key changed
                 try {
+                    console.log("registerAuthKeyReloader");
                     await translator.reloadAuthKey(payload?.auth_key); //Try to reload auth key
+                    console.log("Censoring api key not")
+                    const censoredPayload = await translator.translatorSettings.saveApiKeySecureIfConfiguredAndReturnPayload(payload)
                     const correctObj = await translator.getSettingsAuthKeyCorrectObject(); //
-                    payload = {...payload, ...correctObj}; //Set settings to valid
+
+                    payload = {...censoredPayload, ...correctObj}; //Set settings to valid
+                    console.log("Final payload at: registerAuthKeyReloader");
+                    console.log(JSON.stringify(payload, null, 2))
+
                 } catch (err) { //Auth Key not valid
                     payload = {...payload, ...translator.getSettingsAuthKeyErrorObject(err)};
                 }
@@ -161,6 +168,7 @@ module.exports = async function ({filter, action, init, schedule}, {
 }) {
     try{
         let schema = await getSchema();
+        console.log("Loading Plugin")
         await checkSettingsCollection(services, database, schema)
 
         let translatorSettings = new TranslatorSettings(services, database, schema);

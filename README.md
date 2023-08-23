@@ -61,6 +61,11 @@ With a free DeepL account you can translate 500.000 words per month free.
         - Add the `env` Variable: `AUTO_TRANSLATE_API_KEY_SAVING_PATH` which holds a path
         - Since saving an API key in the database is never a good idea. This allows us, to save the Key into a File.
         - This allows your customers to dynamically change the API key.
+        - setup:
+           - volumes:
+              - ```- ./secrets:/directus/secrets```
+           - env section:  
+              - ```AUTO_TRANSLATE_API_KEY_SAVING_PATH: "/directus/secrets/api-key-in-file.txt"```
     - b)
         - Add the `env` Variable: `AUTO_TRANSLATE_API_KEY` which holds the api key
         - This does not allow dynamically changing the API key as in option a)

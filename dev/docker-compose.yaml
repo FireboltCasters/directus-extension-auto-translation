@@ -16,6 +16,8 @@ services:
       - ./database:/directus/database
       # If you want to load extensions from the host
       - ./auto-translation-hook/dist/index.js:/directus/extensions/hooks/auto-translation-hook/index.js
+      # test the AUTO_TRANSLATE_API_KEY_SAVING_PATH
+      - ./secrets:/directus/secrets
     networks:
       - directus
     environment:
@@ -31,6 +33,8 @@ services:
 
       ADMIN_EMAIL: 'admin@example.com'
       ADMIN_PASSWORD: 'd1r3ctu5'
+
+      AUTO_TRANSLATE_API_KEY_SAVING_PATH: "/directus/secrets/api-key-in-file.txt"
 
 networks:
   directus:

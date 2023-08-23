@@ -18,35 +18,45 @@ module.exports = class TranslatorSettings {
     }
 
     async init(){
+        console.log("INIT TranslatorSettings");
         this.translationSettingsService = await this.itemsServiceCreator.getItemsService(TranslatorSettings.TABLENAME);
 
         // Load the API key from the file if the environment variable is set
         const apiKeyPath = process.env[ENV_NAME_PATH_TO_SAVE_API_KEY];
+        console.log("API PATH: "+apiKeyPath);
         if (apiKeyPath) {
-            this.apiKey = fs.readFileSync(path.resolve(apiKeyPath), 'utf-8').trim();
+            try{
+                this.apiKey = fs.readFileSync(path.resolve(apiKeyPath), 'utf-8').trim();
+                console.log("Found API key: "+this.apiKey)
+            } catch (err){
+                console.log("File not found yet. Will create it later")
+            }
         }
     }
 
-    async setSettings(newSettings) {
+    saveApiKeySecureIfConfiguredAndReturnPayload(payload){
         const apiKeyPath = process.env[ENV_NAME_PATH_TO_SAVE_API_KEY];
 
-        // If a new API key is provided and the environment variable is set
-        if (apiKeyPath && newSettings[FIELDNAME_AUTH_KEY] && newSettings[FIELDNAME_AUTH_KEY] !== this.apiKey) {
+        let newApiKey = payload[FIELDNAME_AUTH_KEY];
+        console.log("new API key: "+newApiKey)
+
+        if (apiKeyPath && newApiKey) {
             // Save the new API key to the specified file
-            fs.writeFileSync(path.resolve(apiKeyPath), newSettings[FIELDNAME_AUTH_KEY], 'utf-8');
+            let filePath = path.resolve(apiKeyPath);
+            console.log("Saving to file");
+            fs.writeFileSync(path.resolve(apiKeyPath), newApiKey, 'utf-8');
 
             // Update the in-memory apiKey with the new value
-            this.apiKey = newSettings[FIELDNAME_AUTH_KEY];
+            this.apiKey = newApiKey;
 
             // Replace the API key with a placeholder before saving to the database
-            newSettings[FIELDNAME_AUTH_KEY] = API_KEY_PLACEHOLDER;
+            payload[FIELDNAME_AUTH_KEY] = API_KEY_PLACEHOLDER;
         }
 
-        const apiKey = process.env[ENV_NAME_API_KEY];
-        if(apiKey){
-            newSettings[FIELDNAME_AUTH_KEY] = API_KEY_PLACEHOLDER;
-        }
+        return payload;
+    }
 
+    async setSettings(newSettings) {
         let settings = await this.getSettings();
         if(!!settings && settings?.id){
             await this.translationSettingsService.updateOne(settings?.id, newSettings);
@@ -54,22 +64,11 @@ module.exports = class TranslatorSettings {
     }
 
     async getSettings() {
-        const apiKeyPath = process.env[ENV_NAME_PATH_TO_SAVE_API_KEY];
-        const apiKey = process.env[ENV_NAME_API_KEY];
-
         // on creating an item, we cant use knex?
         // KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full.
         let settings = await this.translationSettingsService.readByQuery({});
         if(!!settings && settings.length > 0){
             let settingsToReturn = settings[0];
-
-            if (apiKeyPath && this.apiKey) {
-                settingsToReturn[FIELDNAME_AUTH_KEY] = this.apiKey;
-            }
-            if(apiKey){
-                settingsToReturn[FIELDNAME_AUTH_KEY] = apiKey;
-            }
-
             return settingsToReturn;
         }
         return null;
@@ -81,8 +80,7 @@ module.exports = class TranslatorSettings {
     }
 
     async getAuthKey() {
-        let settings = await this.getSettings();
-        return settings?.[FIELDNAME_AUTH_KEY];
+        return this.apiKey;
     }
 
 }
