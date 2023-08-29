@@ -3,7 +3,9 @@ module.exports = class DirectusCollectionTranslator {
     static FIELD_CREATE_TRANSLATIONS_FOR_ALL_LANGUAGES = "create_translations_for_all_languages";
     static FIELD_LET_BE_TRANSLATED = "let_be_translated";
 
-    static FIELD_LANGUAGES_CODE = "languages_ids";
+    static FIELD_LANGUAGES_IDS_NEW = "languages_id"
+    static FIELD_LANGUAGES_CODE_OLD = "languages_code"
+    static FIELD_LANGUAGES_ID_OR_CODE = undefined;
 
     static COLLECTION_LANGUAGES = "languages";
 
@@ -46,10 +48,28 @@ module.exports = class DirectusCollectionTranslator {
         return null;
     }
 
+    /**
+     * This is due to a change from languages_code to languages_ids newer than directus 9.20.1 (or mayer much newer like 10)
+     * therefore we identify which field is used and set it accordingly
+     * @param translation
+     */
+    static setFIELD_LANGUAGES_ID_OR_CODE(translation){
+        const translationFieldOld = translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_CODE_OLD]
+        if(!!translationFieldOld){
+            DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE = DirectusCollectionTranslator.FIELD_LANGUAGES_CODE_OLD
+        }
+        const translationFieldNew = translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_IDS_NEW]
+        if(!!translationFieldNew){
+            DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE = DirectusCollectionTranslator.FIELD_LANGUAGES_IDS_NEW
+        }
+    }
+
     static parseTranslationListToLanguagesCodeDict(translations) {
         let languagesCodeDict = {};
         for (let translation of translations) {
-            languagesCodeDict[translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_CODE]?.code] = translation;
+            DirectusCollectionTranslator.setFIELD_LANGUAGES_ID_OR_CODE(translation);
+
+            languagesCodeDict[translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE]?.code] = translation;
         }
         return languagesCodeDict;
     }
@@ -83,7 +103,8 @@ module.exports = class DirectusCollectionTranslator {
              ]
              */
             for (let translation of currentTranslations) {
-                existingTranslations[translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_CODE]] = translation;
+                DirectusCollectionTranslator.setFIELD_LANGUAGES_ID_OR_CODE(translation);
+                existingTranslations[translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE]] = translation;
             }
 
             let newTranslationsActions = workPayload?.translations || {};
@@ -102,10 +123,8 @@ module.exports = class DirectusCollectionTranslator {
             console.log("sourceTranslation");
             console.log(sourceTranslation);
             if (sourceTranslation) { // we should always have a source translation, since we checked if there are update or create translations
-                let sourceTranslationLanguageCode = sourceTranslation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_CODE]?.code;
+                let sourceTranslationLanguageCode = sourceTranslation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE]?.code;
                 //console.log("sourceTranslationLanguageCode: ", sourceTranslationLanguageCode);
-                let create_translations_for_all_languages = DirectusCollectionTranslator.getValueFromPayloadOrDefaultValue(sourceTranslation, DirectusCollectionTranslator.FIELD_CREATE_TRANSLATIONS_FOR_ALL_LANGUAGES, schema, collectionName);
-                //console.log("create_translations_for_all_languages: ", create_translations_for_all_languages);
 
                 let languagesService = itemsServiceCreator.getItemsService(DirectusCollectionTranslator.COLLECTION_LANGUAGES);
                 let languages = await languagesService.readByQuery({});
@@ -136,22 +155,22 @@ module.exports = class DirectusCollectionTranslator {
                                     ...sourceTranslation,
                                 });
                             } else {
-                                console.log("Its not the source translation, we need to check if it needs to be updated");
+                                //console.log("Its not the source translation, we need to check if it needs to be updated");
                                 let translationInPayload = newTranslationsUpdateLanguageDict[language_code];
 
                                 //check if in the payload the user has given the field "let_be_translated" and overwrite the existing value if it exists
                                 let letBeTranslatedInExistingTranslation = existingTranslation?.[DirectusCollectionTranslator.FIELD_LET_BE_TRANSLATED];
-                                console.log("The existing translation has the field let_be_translated: ", letBeTranslatedInExistingTranslation);
+                                //console.log("The existing translation has the field let_be_translated: ", letBeTranslatedInExistingTranslation);
                                 let createTranslation = letBeTranslatedInExistingTranslation;
                                 let letBeTranslatedInPayload = DirectusCollectionTranslator.getValueFromPayloadOrDefaultValue(translationInPayload, DirectusCollectionTranslator.FIELD_LET_BE_TRANSLATED, schema, collectionName);
-                                console.log("The translation in the payload has the field let_be_translated: ", letBeTranslatedInPayload);
+                                //console.log("The translation in the payload has the field let_be_translated: ", letBeTranslatedInPayload);
                                 if (DirectusCollectionTranslator.isValueDefined(letBeTranslatedInPayload)) { //if payload has false or true, overwrite existing value
                                     createTranslation = letBeTranslatedInPayload;
                                 }
-                                console.log("The translation in the payload will be created: ", createTranslation);
+                                //console.log("The translation in the payload will be created: ", createTranslation);
 
                                 if (!!createTranslation) {
-                                    console.log("Create translation");
+                                    //console.log("Create translation");
                                     let translatedItem = await DirectusCollectionTranslator.translateTranslationItem(sourceTranslation, language_code, translator, translatorSettings, fieldsToTranslate);
                                     translationsToUpdate.push({
                                         ...existingTranslation,
@@ -177,7 +196,6 @@ module.exports = class DirectusCollectionTranslator {
                                 translationsToCreate.push({
                                     ...sourceTranslation,
                                     [DirectusCollectionTranslator.FIELD_LET_BE_TRANSLATED]: DirectusCollectionTranslator.getValueFromPayloadOrDefaultValue(sourceTranslation, DirectusCollectionTranslator.FIELD_LET_BE_TRANSLATED, schema, collectionName),
-                                    [DirectusCollectionTranslator.FIELD_CREATE_TRANSLATIONS_FOR_ALL_LANGUAGES]: DirectusCollectionTranslator.getValueFromPayloadOrDefaultValue(sourceTranslation, DirectusCollectionTranslator.FIELD_CREATE_TRANSLATIONS_FOR_ALL_LANGUAGES, schema, collectionName),
                                     [DirectusCollectionTranslator.FIELD_BE_SOURCE_FOR_TRANSLATION]: true,
                                 });
                             } else {
@@ -195,7 +213,7 @@ module.exports = class DirectusCollectionTranslator {
                                     letBeTranslated = letBeTranslatedInPayload;
                                 }
 
-                                if (create_translations_for_all_languages && letBeTranslated) {
+                                if (letBeTranslated) {
                                     //console.log("Create translation");
                                     let translatedItem = await DirectusCollectionTranslator.translateTranslationItem(sourceTranslation, language?.code, translator, translatorSettings, fieldsToTranslate);
                                     translationsToCreate.push({
@@ -249,7 +267,7 @@ module.exports = class DirectusCollectionTranslator {
                 let fieldValue = sourceTranslation[field];
                 if (!!fieldValue) {
                     try {
-                        let translatedValue = await translator.translate(fieldValue, sourceTranslation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_CODE]?.code, language_code);
+                        let translatedValue = await translator.translate(fieldValue, sourceTranslation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE]?.code, language_code);
                         if (!!translatedValue) {
                             translatedItem[field] = translatedValue;
                         } else {
@@ -263,7 +281,7 @@ module.exports = class DirectusCollectionTranslator {
             }
         }
 
-        translatedItem[DirectusCollectionTranslator.FIELD_LANGUAGES_CODE] = {
+        translatedItem[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE] = {
             "code": language_code
         }
         translatedItem[DirectusCollectionTranslator.FIELD_LET_BE_TRANSLATED] = true; //if we create a translation, we want it in the future also

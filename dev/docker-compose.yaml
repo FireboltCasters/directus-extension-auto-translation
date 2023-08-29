@@ -5,6 +5,7 @@ services:
     container_name: directus-auto-translation
     #image: directus/directus:9.16.1
     image: directus/directus:9.20.4
+#    image: directus/directus:latest
     ports:
       - 8055:8055
     volumes:

@@ -82,8 +82,6 @@ This example shows how to use the extension for a collection `wikis`
       - This field is used to determine if the translation is the source of the translation
     - Add a `let_be_translated` field (default: `true`)
         - This field is used to determine if the record should be translated
-    - Add a `create_translations_for_all_languages` field (default: `true`)
-        - This field is used to determine if you want to create a translation for all languages (defined in the `languages` collection)
 
 If you now create or update a record in the `wikis` collection with a `translation` it will be automatically translated.
 
