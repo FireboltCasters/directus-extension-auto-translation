@@ -23,6 +23,9 @@
 		"clean": "rm -rf ./dist"
 	},
 	"release-it": {
+		"hooks": {
+			"before:init": ["npm run build"]
+		},
 		"git": {
 			"commitMessage": "[RELEASE] ${version}",
 			"tagName": "v${version}"
