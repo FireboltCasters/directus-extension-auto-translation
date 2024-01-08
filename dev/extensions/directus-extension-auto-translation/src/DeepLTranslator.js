@@ -1,6 +1,7 @@
-const deepl = require("deepl-node");
+import deepl from 'deepl-node';
 
-module.exports = class DeepLTranlator {
+
+export class DeepLTranslator {
 
     constructor(auth_key) {
         this.translator = new deepl.Translator(auth_key);

@@ -1,13 +1,14 @@
-const ItemsServiceCreator = require("./helper/ItemsServiceCreator");
-const fs = require('fs')
-const path = require('path')
+import {ItemsServiceCreator} from './helper/ItemsServiceCreator.js';
+import fs from 'fs';
+import path from 'path';
+
 const ENV_NAME_API_KEY = "AUTO_TRANSLATE_API_KEY";
 const ENV_NAME_PATH_TO_SAVE_API_KEY = "AUTO_TRANSLATE_API_KEY_SAVING_PATH";
 const API_KEY_PLACEHOLDER = "XXXXXXXXXXXXXXXXXXXXX";
 
 const FIELDNAME_AUTH_KEY = "auth_key";
 
-module.exports = class TranslatorSettings {
+export class TranslatorSettings {
 
     static TABLENAME = "auto_translation_settings";
 
@@ -34,17 +35,24 @@ module.exports = class TranslatorSettings {
         }
     }
 
-    saveApiKeySecureIfConfiguredAndReturnPayload(payload){
+    saveApiKeySecureIfConfiguredAndReturnPayload(payload) {
         const apiKeyPath = process.env[ENV_NAME_PATH_TO_SAVE_API_KEY];
 
         let newApiKey = payload[FIELDNAME_AUTH_KEY];
-        console.log("new API key: "+newApiKey)
+        console.log("new API key: " + newApiKey);
 
         if (apiKeyPath && newApiKey) {
-            // Save the new API key to the specified file
             let filePath = path.resolve(apiKeyPath);
+            let dirName = path.dirname(filePath);
+
+            // Check if the directory exists; if not, create it
+            if (!fs.existsSync(dirName)) {
+                fs.mkdirSync(dirName, { recursive: true });
+                console.log("Created directory: " + dirName);
+            }
+
             console.log("Saving to file");
-            fs.writeFileSync(path.resolve(apiKeyPath), newApiKey, 'utf-8');
+            fs.writeFileSync(filePath, newApiKey, 'utf-8');
 
             // Update the in-memory apiKey with the new value
             this.apiKey = newApiKey;
@@ -55,6 +63,7 @@ module.exports = class TranslatorSettings {
 
         return payload;
     }
+
 
     async setSettings(newSettings) {
         let settings = await this.getSettings();

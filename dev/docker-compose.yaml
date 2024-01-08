@@ -3,9 +3,7 @@ services:
 
   directus:
     container_name: directus-auto-translation
-    #image: directus/directus:9.16.1
-    image: directus/directus:9.20.4
-#    image: directus/directus:latest
+    image: directus/directus:10.8.3
     ports:
       - 8055:8055
     volumes:
@@ -15,10 +13,10 @@ services:
       - ./uploads:/directus/uploads
       # Make sure to also mount the volume when using SQLite
       - ./database:/directus/database
-      # If you want to load extensions from the host
-      - ./auto-translation-hook/dist/index.js:/directus/extensions/hooks/auto-translation-hook/index.js
-      # test the AUTO_TRANSLATE_API_KEY_SAVING_PATH
-      - ./secrets:/directus/secrets
+      # If you want to load extensions from builded files
+      #- ./auto-backup-hook/dist/index.js:/directus/extensions/hooks/auto-backup-hook/index.js
+      # Hotreload dev
+      - ./extensions:/directus/extensions/
     networks:
       - directus
     environment:
@@ -36,6 +34,5 @@ services:
       ADMIN_PASSWORD: 'd1r3ctu5'
 
       AUTO_TRANSLATE_API_KEY_SAVING_PATH: "/directus/secrets/api-key-in-file.txt"
-
 networks:
   directus:

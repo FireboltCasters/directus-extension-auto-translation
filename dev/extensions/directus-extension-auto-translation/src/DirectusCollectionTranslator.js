@@ -1,4 +1,4 @@
-module.exports = class DirectusCollectionTranslator {
+export class DirectusCollectionTranslator {
     static FIELD_BE_SOURCE_FOR_TRANSLATION = "be_source_for_translations";
     static FIELD_CREATE_TRANSLATIONS_FOR_ALL_LANGUAGES = "create_translations_for_all_languages";
     static FIELD_LET_BE_TRANSLATED = "let_be_translated";
@@ -77,33 +77,54 @@ module.exports = class DirectusCollectionTranslator {
     static async modifyPayloadForTranslation(currentItem, payload, translator, translatorSettings, itemsServiceCreator, schema, collectionName) {
         if (DirectusCollectionTranslator.areTranslationsToTranslate(payload)) {
             let workPayload = JSON.parse(JSON.stringify(payload));
-            //console.log("workPayload");
-            //console.log(JSON.stringify(workPayload, null, 2));
+
+            /**
+              workPayload
+              {
+                "translations": {
+                  "create": [],
+                  "update": [
+                    {
+                      "description": "Okay was geht ab?",
+                      "languages_id": {
+                        "code": "de-DE"
+                      },
+                      "id": 1
+                    }
+                  ],
+                  "delete": []
+                }
+              }
+             */
 
             let currentTranslations = currentItem?.translations || []; //need to know, if we need to update old translations or create them
 
-            let existingTranslations = {};
             /**
              currentTranslations
              [
-             {
-                id: 1,
-                wikis_id: 1,
-                languages_code: 'de-DE',
-                content: 'Diese Wikis können über das Backend erstellt werden. Zudem werden diese automatisch übersetzt mittels DeepL. ',
-                title: 'Remote Menu'
-              },
-             {
-                id: 3,
-                wikis_id: 1,
-                languages_code: 'en-US',
-                content: 'Okay mal schauen',
-                title: null
-              }
+               {
+                 "id": 1,
+                 "test_id": 1,
+                 "languages_id": "de-DE",
+                 "be_source_for_translation": true,
+                 "let_be_translated": true,
+                 "create_translations_for_all_languages": true,
+                 "description": "Okay was geht ab?"
+               },
+               {
+                 "id": 2,
+                 "test_id": 1,
+                 "languages_id": "ar-SA",
+                 "be_source_for_translation": false,
+                 "let_be_translated": true,
+                 "create_translations_for_all_languages": true,
+                 "description": null
+               }
              ]
              */
+
+            let existingTranslations = {};
             for (let translation of currentTranslations) {
-                DirectusCollectionTranslator.setFIELD_LANGUAGES_ID_OR_CODE(translation);
                 existingTranslations[translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE]] = translation;
             }
 
@@ -120,8 +141,6 @@ module.exports = class DirectusCollectionTranslator {
             let sourceTranslation = sourceTranslationInPayload || sourceTranslationInExistingItem
             //TODO Maybe throw an error if multiple source translations are found?
 
-            console.log("sourceTranslation");
-            console.log(sourceTranslation);
             if (sourceTranslation) { // we should always have a source translation, since we checked if there are update or create translations
                 let sourceTranslationLanguageCode = sourceTranslation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE]?.code;
                 //console.log("sourceTranslationLanguageCode: ", sourceTranslationLanguageCode);

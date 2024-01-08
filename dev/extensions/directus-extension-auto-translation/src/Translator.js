@@ -1,6 +1,6 @@
-const DeepLTranslator = require('./DeepLTranslator');
+import {DeepLTranslator} from './DeepLTranslator.js';
 
-module.exports = class Translator {
+export class Translator {
 
     constructor(translatorSettings, logger) {
         this.logger = logger;

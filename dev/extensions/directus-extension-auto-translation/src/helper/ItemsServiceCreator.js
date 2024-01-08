@@ -1,5 +1,5 @@
 // https://github.com/directus/directus/blob/main/api/src/services/items.ts
-module.exports = class CollectionsServiceCreator {
+export class ItemsServiceCreator {
 
     constructor(services, database, schema) {
         this.services = services;
@@ -7,9 +7,9 @@ module.exports = class CollectionsServiceCreator {
         this.schema = schema;
     }
 
-    getCollectionsService() {
-        const {CollectionsService} = this.services;
-        return new CollectionsService({
+    getItemsService(tablename) {
+        const {ItemsService} = this.services;
+        return new ItemsService(tablename, {
             accountability: null, //this makes us admin
             knex: this.database, //TODO: i think this is not neccessary
             schema: this.schema,

@@ -1,4 +1,4 @@
-module.exports = function () {
+export default function () {
   return 'version: 1\n' +
       'directus: 9.18.1\n' +
       'collections:\n' +
@@ -31,7 +31,7 @@ module.exports = function () {
       '        `limit` integer null default \'500000\', `percentage` integer null default\n' +
       '        null, `used` integer null default \'0\', `valid_auth_key` boolean null\n' +
       '        default \'0\', `extra` text null default null)\n' +
-     'fields:\n' +
+      'fields:\n' +
       '  - collection: auto_translation_settings\n' +
       '    field: active\n' +
       '    meta:\n' +
@@ -485,5 +485,5 @@ module.exports = function () {
       '      width: full\n' +
       '    schema: null\n' +
       '    type: alias\n' +
-       'relations: []\n'
+      'relations: []\n'
 };
