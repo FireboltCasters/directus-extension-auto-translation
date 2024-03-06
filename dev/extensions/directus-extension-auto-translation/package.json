@@ -2,7 +2,7 @@
 	"name": "directus-extension-auto-translation",
 	"description": "Please enter a description for your extension",
 	"icon": "extension",
-	"version": "10.8.7",
+	"version": "10.8.8",
 	"keywords": [
 		"directus",
 		"directus-extension",
@@ -24,7 +24,9 @@
 	},
 	"release-it": {
 		"hooks": {
-			"before:init": ["npm run build"]
+			"before:init": [
+				"npm run build"
+			]
 		},
 		"git": {
 			"commitMessage": "[RELEASE] ${version}",
