@@ -19,16 +19,16 @@ export class TranslatorSettings {
     }
 
     async init(){
-        console.log("INIT TranslatorSettings");
+        //console.log("INIT TranslatorSettings");
         this.translationSettingsService = await this.itemsServiceCreator.getItemsService(TranslatorSettings.TABLENAME);
 
         // Load the API key from the file if the environment variable is set
         const apiKeyPath = process.env[ENV_NAME_PATH_TO_SAVE_API_KEY];
-        console.log("API PATH: "+apiKeyPath);
+        //console.log("API PATH: "+apiKeyPath);
         if (apiKeyPath) {
             try{
                 this.apiKey = fs.readFileSync(path.resolve(apiKeyPath), 'utf-8').trim();
-                console.log("Found API key: "+this.apiKey)
+                //console.log("Found API key: "+this.apiKey)
             } catch (err){
                 console.log("File not found yet. Will create it later")
             }
