@@ -1,6 +1,5 @@
 export class DirectusCollectionTranslator {
     static FIELD_BE_SOURCE_FOR_TRANSLATION = "be_source_for_translations";
-    static FIELD_CREATE_TRANSLATIONS_FOR_ALL_LANGUAGES = "create_translations_for_all_languages";
     static FIELD_LET_BE_TRANSLATED = "let_be_translated";
 
     static FIELD_LANGUAGES_IDS_NEW = "languages_id"
@@ -14,7 +13,7 @@ export class DirectusCollectionTranslator {
      * Therefore check if there are new translations to create
      * or if there are translations to update
      */
-    static areTranslationsToTranslate(payload) {
+    static areTranslationsToTranslate(payload: any) {
         if (!!payload && !!payload.translations) {
             let newTranslationsActions = payload?.translations || {};
             let newTranslationsCreateActions = newTranslationsActions?.create || [];
@@ -24,7 +23,7 @@ export class DirectusCollectionTranslator {
         return false;
     }
 
-    static getSourceTranslationFromTranslations(translations, schema, collectionName) {
+    static getSourceTranslationFromTranslations(translations: any, schema: any, collectionName: any) {
         if (!!translations && translations.length > 0) {
             for (let translation of translations) {
                 let let_be_source_for_translation = DirectusCollectionTranslator.getValueFromPayloadOrDefaultValue(translation, DirectusCollectionTranslator.FIELD_BE_SOURCE_FOR_TRANSLATION, schema, collectionName);
@@ -219,7 +218,7 @@ export class DirectusCollectionTranslator {
                                 });
                             } else {
                                 //console.log("Its not the source translation, we need to check if it needs to be created");
-                                //If we dont have an existing translation and the permission to create translations for all languages is set
+                                //If we dont have an existing translation and the permission to all languages is set
                                 let translationInPayload = newTranslationsCreateLanguageDict[language_code];
 
                                 //console.log("translationInPayload: ");

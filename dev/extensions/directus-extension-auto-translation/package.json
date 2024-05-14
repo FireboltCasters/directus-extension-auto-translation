@@ -1,19 +1,22 @@
 {
 	"name": "directus-extension-auto-translation",
-	"description": "Please enter a description for your extension",
+	"description": "An extension for Directus that automatically translates fields using DeepL API when provided with an API key.",
 	"icon": "extension",
-	"version": "10.8.7",
+	"version": "10.11.0",
 	"keywords": [
 		"directus",
 		"directus-extension",
-		"directus-custom-hook"
+		"directus-extension-hook"
 	],
 	"type": "module",
+	"files": [
+		"dist"
+	],
 	"directus:extension": {
 		"type": "hook",
 		"path": "dist/index.js",
 		"source": "src/index.ts",
-		"host": "^10.3.0"
+		"host": "^10.10.0"
 	},
 	"scripts": {
 		"build": "directus-extension build",
@@ -22,30 +25,16 @@
 		"release": "release-it --npm.skipChecks",
 		"clean": "rm -rf ./dist"
 	},
-	"release-it": {
-		"hooks": {
-			"before:init": ["npm run build"]
-		},
-		"git": {
-			"commitMessage": "[RELEASE] ${version}",
-			"tagName": "v${version}"
-		},
-		"npm": {
-			"publish": true
-		},
-		"github": {
-			"release": true
-		}
-	},
-	"devDependencies": {
-		"@directus/extensions-sdk": "10.3.0",
-		"@types/node": "^20.10.7",
-		"typescript": "^5.3.3",
-		"release-it": "^14.2.2",
-		"rimraf": "^3.0.2"
-	},
 	"dependencies": {
 		"deepl-node": "^1.5.0",
 		"js-yaml": "^4.1.0"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "11.0.4",
+		"@types/js-yaml": "^4.0.9",
+		"@types/node": "^20.12.12",
+		"release-it": "^14.2.2",
+		"rimraf": "^3.0.2",
+		"typescript": "^5.4.5"
 	}
 }

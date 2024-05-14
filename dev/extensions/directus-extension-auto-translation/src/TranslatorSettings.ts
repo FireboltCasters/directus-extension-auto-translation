@@ -11,8 +11,12 @@ const FIELDNAME_AUTH_KEY = "auth_key";
 export class TranslatorSettings {
 
     static TABLENAME = "auto_translation_settings";
+    private database: any;
+    private itemsServiceCreator: ItemsServiceCreator;
+    private apiKey: null | string;
+    private translationSettingsService: any;
 
-    constructor(services, database, schema) {
+    constructor(services: any, database: any, schema: any) {
         this.database = database;
         this.itemsServiceCreator = new ItemsServiceCreator(services, database, schema);
         this.apiKey = null; // To hold the API key in memory
@@ -35,7 +39,7 @@ export class TranslatorSettings {
         }
     }
 
-    saveApiKeySecureIfConfiguredAndReturnPayload(payload) {
+    saveApiKeySecureIfConfiguredAndReturnPayload(payload: any) {
         const apiKeyPath = process.env[ENV_NAME_PATH_TO_SAVE_API_KEY];
 
         let newApiKey = payload[FIELDNAME_AUTH_KEY];
@@ -65,7 +69,7 @@ export class TranslatorSettings {
     }
 
 
-    async setSettings(newSettings) {
+    async setSettings(newSettings: any) {
         let settings = await this.getSettings();
         if(!!settings && settings?.id){
             await this.translationSettingsService.updateOne(settings?.id, newSettings);

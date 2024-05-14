@@ -1,9 +1,11 @@
-import deepl from 'deepl-node';
+import deepl, {SourceLanguageCode, TargetLanguageCode, Translator} from 'deepl-node';
+import {MyTranslatorInterface} from "./MyTranslatorInterface";
 
 
-export class DeepLTranslator {
+export class DeepLTranslator implements MyTranslatorInterface {
+    private translator: Translator;
 
-    constructor(auth_key) {
+    constructor(auth_key: string) {
         this.translator = new deepl.Translator(auth_key);
     }
 
@@ -27,19 +29,20 @@ export class DeepLTranslator {
          */
     }
 
-    async translate(text, source_language, destination_language) {
+    async translate(text: string, source_language: string, destination_language: string) {
         let translationResponse = null;
-        let sourceLanguageCode = this.getDeepLLanguageCode(source_language);
-        let destinationLanguageCode = this.getDeepLLanguageCode(destination_language);
+        let sourceLanguageCode = this.getDeepLLanguageCodeSource(source_language);
+        let destinationLanguageCode = this.getDeepLLanguageCodeTarget(destination_language);
 
         try{
             translationResponse = await this.translateRaw(text, sourceLanguageCode, destinationLanguageCode);
-        } catch(error){
+        } catch(error: any){
             let errorMessage = error.toString();
             if(errorMessage.includes("targetLang") && errorMessage.includes("deprecated")){
                 //console.log("Target language is deprecated");
                 try{
-                    translationResponse = await this.translateRaw(text, sourceLanguageCode, destination_language);
+                    let backupDestinationLanguageCode = destination_language as TargetLanguageCode;
+                    translationResponse = await this.translateRaw(text, sourceLanguageCode, backupDestinationLanguageCode);
                 } catch(error){
                     console.log(error);
                 }
@@ -51,9 +54,15 @@ export class DeepLTranslator {
         return translationResponse;
     }
 
-    async translateRaw(text, source_language_code, destination_language_code) {
+    private replaceAll(str: string, find: string, replace: string) {
+        // use regex where find is replaced with replace globally and multiple times
+        // find could be a special character like * which needs to be escaped
+        return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+    }
+
+    async translateRaw(text: string, source_language_code: SourceLanguageCode, destination_language_code: TargetLanguageCode) {
         //copy text string to another variable
-        let textToTranslate = text;
+        let textToTranslate: string = text;
 
         const dictWithReplacement = {
             // "original": "replacement"
@@ -63,7 +72,7 @@ export class DeepLTranslator {
 
         //replace all keys in dictWithReplacement with their values
         for (const [key, value] of Object.entries(dictWithReplacement)) {
-            textToTranslate = textToTranslate.replaceAll(key, value);
+            textToTranslate = this.replaceAll(textToTranslate, key, value)
         }
 
         console.log("translate:")
@@ -76,7 +85,7 @@ export class DeepLTranslator {
 
         //replace all values in dictWithReplacement with their keys
         for (const [key, value] of Object.entries(dictWithReplacement)) {
-            translation = translation.replaceAll(value, key);
+            translation = this.replaceAll(translation, value, key)
         }
 
         //replace all <*>'s with *'s
@@ -85,11 +94,14 @@ export class DeepLTranslator {
     }
 
     async getExtra(){
-        let extraObj = {};
+
         const sourceLanguages = await this.translator.getSourceLanguages()
         const targetLanguages = await this.translator.getTargetLanguages()
-        extraObj.sourceLanguages = sourceLanguages;
-        extraObj.targetLanguages = targetLanguages;
+
+        let extraObj = {
+            sourceLanguages: sourceLanguages,
+            targetLanguages: targetLanguages
+        };
         const extra = JSON.stringify(extraObj, null, 2);
 
         return {
@@ -114,7 +126,15 @@ export class DeepLTranslator {
      * Private Methods
      */
 
-    getDeepLLanguageCode(directus_language_code) {
+    getDeepLLanguageCodeSource(directus_language_code: string){
+        return this.getDeepLLanguageCode(directus_language_code) as SourceLanguageCode;
+    }
+
+    getDeepLLanguageCodeTarget(directus_language_code: string){
+        return this.getDeepLLanguageCode(directus_language_code) as TargetLanguageCode;
+    }
+
+    getDeepLLanguageCode(directus_language_code: string){
         /** directus_language_code
          * e.g. "en-US" -> "en"
          */
@@ -183,6 +203,7 @@ export class DeepLTranslator {
             let splits = directus_language_code.split("-");
             return splits[0];
         }
+
         return directus_language_code;
     }
 }

@@ -1,8 +1,12 @@
-import {DeepLTranslator} from './DeepLTranslator.js';
+import {DeepLTranslator} from './DeepLTranslator';
+import {MyTranslatorInterface} from "./MyTranslatorInterface";
 
 export class Translator {
+    private logger: any;
+    private translatorSettings: any;
+    private translatorImplementation: undefined | MyTranslatorInterface;
 
-    constructor(translatorSettings, logger) {
+    constructor(translatorSettings: any, logger: any) {
         this.logger = logger;
         this.translatorSettings = translatorSettings;
     }
@@ -18,7 +22,8 @@ export class Translator {
         }
     }
 
-    async translate(text, source_language, destination_language) {
+    async translate(text: string, source_language: string, destination_language: string) {
+        if(!this.translatorImplementation) return null;
         const translation = await this.translatorImplementation.translate(text, source_language, destination_language);
         await this.reloadUsage(); //update usage stats
         return translation;
@@ -30,13 +35,13 @@ export class Translator {
         return {valid_auth_key: true, informations: "Auth Key is valid!", ...usage, ...extra};
     }
 
-    getSettingsAuthKeyErrorObject(error) {
+    getSettingsAuthKeyErrorObject(error: any) {
         return {auth_key: null, valid_auth_key: false, informations: "Auth Key not valid!\n" + error.toString()}
     }
 
     /** Private Methods */
 
-    async reloadAuthKey(auth_key) {
+    async reloadAuthKey(auth_key: string) {
         this.translatorImplementation = new DeepLTranslator(auth_key);
         await this.translatorImplementation.init();
         await this.reloadUsage();
@@ -54,14 +59,16 @@ export class Translator {
     }
 
     async getUsage() {
+        if(!this.translatorImplementation) return {used: 0, limit: 0};
         return await this.translatorImplementation.getUsage();
     }
 
     async getExtra() {
+        if(!this.translatorImplementation) return {extra: ""};
         return await this.translatorImplementation.getExtra();
     }
 
-    async setSettings(newSettings) {
+    async setSettings(newSettings: any) {
         await this.translatorSettings.setSettings(newSettings);
     }
 

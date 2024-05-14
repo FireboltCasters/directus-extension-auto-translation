@@ -93,7 +93,7 @@ export default function () {
       '      interface: input\n' +
       '      note: >-\n' +
       '        Authentication - You need an authentication key to access to the API.\n' +
-      '        https://www.deepl.com/de/account/summary\n' +
+      '        https://www.deepl.com/de/your-account/keys\n' +
       '      options:\n' +
       '        iconLeft: key\n' +
       '        masked: true\n' +
