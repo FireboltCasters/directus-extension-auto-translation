@@ -2,7 +2,7 @@
 	"name": "directus-extension-auto-translation",
 	"description": "An extension for Directus that automatically translates fields using DeepL API when provided with an API key.",
 	"icon": "extension",
-	"version": "10.11.1",
+	"version": "10.11.2",
 	"keywords": [
 		"directus",
 		"directus-extension",
@@ -27,7 +27,9 @@
 	},
 	"release-it": {
 		"hooks": {
-			"before:init": ["npm run build"]
+			"before:init": [
+				"npm run build"
+			]
 		},
 		"git": {
 			"commitMessage": "[RELEASE] ${version}",
