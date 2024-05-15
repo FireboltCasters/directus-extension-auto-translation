@@ -34,26 +34,13 @@ With a free DeepL account you can translate 500.000 words per month free.
 
 ### Installation
 
+- https://docs.directus.io/extensions/installing-extensions.html
+
 1. Backup your database!
-2. Install the extension
-    - Normal project
+2. Installing via the npm Registry
+     - Dockerfile
         ```
-        cd <directus-project-folder>
-        npm install directus-extension-auto-translation
-        ```
-   - Docker-Compose
-        In your docker-compose.yml modify your container:
-        ```
-        directus:
-            image: directus/directus:9.16.1
-            command: >
-                sh -c "
-                npm install directus-extension-auto-translation && 
-                npx directus bootstrap && echo 'Node' && 
-                node node_modules/directus/dist/start.js
-                "
-            ...
-        ...
+        RUN pnpm install  directus-extension-auto-translation
         ```
 3. [Recommended]
    - Disable saving API key into database.
