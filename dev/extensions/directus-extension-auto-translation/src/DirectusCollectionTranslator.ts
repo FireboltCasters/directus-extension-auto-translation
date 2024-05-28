@@ -73,7 +73,7 @@ export class DirectusCollectionTranslator {
         return languagesCodeDict;
     }
 
-    static async modifyPayloadForTranslation(currentItem, payload, translator, translatorSettings, itemsServiceCreator, schema, collectionName) {
+    static async modifyPayloadForTranslation(currentItem, payload, translator, translatorSettings, itemsServiceCreator, schema, collectionName, translations_field) {
         if (DirectusCollectionTranslator.areTranslationsToTranslate(payload)) {
             let workPayload = JSON.parse(JSON.stringify(payload));
 
@@ -96,7 +96,7 @@ export class DirectusCollectionTranslator {
               }
              */
 
-            let currentTranslations = currentItem?.translations || []; //need to know, if we need to update old translations or create them
+            let currentTranslations = currentItem?.[translations_field] || []; //need to know, if we need to update old translations or create them
 
             /**
              currentTranslations
@@ -127,7 +127,7 @@ export class DirectusCollectionTranslator {
                 existingTranslations[translation?.[DirectusCollectionTranslator.FIELD_LANGUAGES_ID_OR_CODE]] = translation;
             }
 
-            let newTranslationsActions = workPayload?.translations || {};
+            let newTranslationsActions = workPayload?.[translations_field] || {};
             let newTranslationsCreateActions = newTranslationsActions?.create || [];
             let newTranslationsUpdateActions = newTranslationsActions?.update || [];
 
@@ -250,7 +250,7 @@ export class DirectusCollectionTranslator {
                         }
                     }
 
-                    payload.translations = {
+                    payload[translations_field] = {
                         create: translationsToCreate,
                         update: translationsToUpdate,
                         delete: translationsToDelete

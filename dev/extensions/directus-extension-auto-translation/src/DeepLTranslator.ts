@@ -75,10 +75,10 @@ export class DeepLTranslator implements MyTranslatorInterface {
             textToTranslate = this.replaceAll(textToTranslate, key, value)
         }
 
-        console.log("translate:")
-        console.log("text: "+text);
-        console.log("source_language_code: "+source_language_code)
-        console.log("destination_language_code: "+destination_language_code)
+        //console.log("translate:")
+        //console.log("text: "+text);
+        //console.log("source_language_code: "+source_language_code)
+        //console.log("destination_language_code: "+destination_language_code)
 
         let translationResponse = await this.translator.translateText(textToTranslate, source_language_code, destination_language_code);
         let translation = translationResponse?.text;

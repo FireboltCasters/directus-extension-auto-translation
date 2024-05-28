@@ -43,7 +43,7 @@ export class TranslatorSettings {
         const apiKeyPath = process.env[ENV_NAME_PATH_TO_SAVE_API_KEY];
 
         let newApiKey = payload[FIELDNAME_AUTH_KEY];
-        console.log("new API key: " + newApiKey);
+        //console.log("new API key: " + newApiKey);
 
         if (apiKeyPath && newApiKey) {
             let filePath = path.resolve(apiKeyPath);
@@ -52,10 +52,10 @@ export class TranslatorSettings {
             // Check if the directory exists; if not, create it
             if (!fs.existsSync(dirName)) {
                 fs.mkdirSync(dirName, { recursive: true });
-                console.log("Created directory: " + dirName);
+                //console.log("Created directory: " + dirName);
             }
 
-            console.log("Saving to file");
+            //console.log("Saving to file");
             fs.writeFileSync(filePath, newApiKey, 'utf-8');
 
             // Update the in-memory apiKey with the new value
