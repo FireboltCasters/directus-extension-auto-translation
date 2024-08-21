@@ -4,6 +4,8 @@ services:
   directus:
     container_name: directus-auto-translation
     image: directus/directus:10.11.0
+    env_file:
+      - .env
     ports:
       - 8055:8055
     volumes:
@@ -33,6 +35,7 @@ services:
       ADMIN_EMAIL: 'admin@example.com'
       ADMIN_PASSWORD: 'd1r3ctu5'
 
-      AUTO_TRANSLATE_API_KEY_SAVING_PATH: "/directus/secrets/api-key-in-file.txt"
+      AUTO_TRANSLATE_API_KEY: "${AUTO_TRANSLATE_API_KEY}"
+      #AUTO_TRANSLATE_API_KEY_SAVING_PATH: "/directus/secrets/api-key-in-file.txt"
 networks:
   directus:

@@ -106,12 +106,12 @@ async function handleCreateOrUpdate(tablename, payload, meta, context, getSchema
 			//console.log(translations_fields);
 
 			let modifiedPayload = payload;
-			console.log("["+PLUGIN_NAME+"] - "+"Start translation for "+tablename+" table");
+			//console.log("["+PLUGIN_NAME+"] - "+"Start translation for "+tablename+" table");
 			for(let translations_field of translations_fields){
 				let currentItem = await getCurrentItemForTranslation(itemsService, meta, translations_field);
 				modifiedPayload = await DirectusCollectionTranslator.modifyPayloadForTranslation(currentItem, modifiedPayload, translator, translatorSettings, itemsServiceCreator, schema, tablename, translations_field);
 			}
-			console.log("["+PLUGIN_NAME+"] - "+"End translation for "+tablename+" table");
+			//console.log("["+PLUGIN_NAME+"] - "+"End translation for "+tablename+" table");
 
 			return modifiedPayload;
 		}
@@ -133,7 +133,7 @@ function registerCollectionAutoTranslation(filter, getSchema, services, logger) 
 	}
 }
 
-function registerAuthKeyReloader(filter, translator) {
+async function registerAuthKeyReloader(filter, translator) {
 	filter(
 		TranslatorSettings.TABLENAME + ".items.update",
 		async (payload, meta, context) => {
@@ -196,8 +196,6 @@ export default defineHook(({filter, action, init, schedule}, {
 	getSchema,
 	logger
 }) => {
-	console.log("Init auto backup")
-
 	action(
 		"server.start",
 		async (meta, context) => {
@@ -210,7 +208,7 @@ export default defineHook(({filter, action, init, schedule}, {
 				await translatorSettings.init();
 				let translator = new Translator(translatorSettings, logger);
 				await translator.init();
-				registerAuthKeyReloader(filter, translator);
+				await registerAuthKeyReloader(filter, translator);
 
 				registerCollectionAutoTranslation(filter, getSchema, services, logger);
 				//registerLanguagesFilter(filter, getSchema, services, logger); //TODO implement auto translate for new languages

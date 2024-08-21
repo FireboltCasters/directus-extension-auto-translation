@@ -34,9 +34,15 @@ export class TranslatorSettings {
                 this.apiKey = fs.readFileSync(path.resolve(apiKeyPath), 'utf-8').trim();
                 //console.log("Found API key: "+this.apiKey)
             } catch (err){
-                console.log("File not found yet. Will create it later")
+                //console.log("File not found yet. Will create it later")
             }
         }
+
+        const apiKeyFromEnv = process.env[ENV_NAME_API_KEY];
+        if (apiKeyFromEnv) {
+            this.apiKey = apiKeyFromEnv;
+        }
+
     }
 
     saveApiKeySecureIfConfiguredAndReturnPayload(payload: any) {
